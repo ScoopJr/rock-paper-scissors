@@ -6,111 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
 
+    <h2>Your choice:<span id="user-selection"></span></h2>
+    <h2>Computer's choice:<span id="computer-selection"></span></h2>
+    <h2>Result:<span id="result"></span></h2>
 
-    <script>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
 
-      // 1. Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
-      function getComputerChoice() {
-        randomNumber = Math.floor(Math.random() * 3);
-
-        if (randomNumber == "0") {
-            return "rock";
-        }
-        else if (randomNumber == "1") {
-            return "paper";
-        }
-        else {
-            return "scissors";
-        }
-      }
-
-      console.log(getComputerChoice()); // TEST
-      console.log(typeof getComputerChoice); // TEST
-
-    
-/* 4. Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters 
-- the playerSelection and computerSelection 
-- and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-
-Make your function’s playerSelection parameter case-insensitive 
-(so users can input rock, ROCK, RocK or any other variation). */
-
-
-function playRound(playerSelection, computerSelection) {
- 
-  // playerSelection == "rock" && computerSelection == "rock"        return "It's a DRAW this round";
-  // playerSelection == "rock" && computerSelection == "paper"        return "Computer wins. You LOSE this round";
-  // playerSelection == "rock" && computerSelection == "scissors"        return "Player wins. You WIN this round";
-    
-  // playerSelection == "paper" && computerSelection == "rock"        return "Player wins. You WIN this round";
-  // playerSelection == "paper" && computerSelection == "paper"        return "It's a DRAW this round";
-  // playerSelection == "paper" && computerSelection == "scissors"        return "Computer wins. You LOSE this round";
-    
-  // playerSelection == "scissors" && computerSelection == "rock"        return string("Computer wins. You LOSE this round";
-  // playerSelection == "scissors" && computerSelection == "paper"        return string("Player wins. You WIN this round";
-  // playerSelection == "scissors" && computerSelection == "scissors"        return string"It's a DRAW this round";
-
-        if (playerSelection == "rock" && computerSelection == "rock") {
-            return "It's a DRAW this round";
-        }
-        else if (playerSelection == "rock" && computerSelection == "paper") {
-            return "Computer wins. You LOSE this round";
-        }
-        else if (playerSelection == "rock" && computerSelection == "scissors") {
-            return "Player wins. You WIN this round";
-        }
-        else if (playerSelection == "paper" && computerSelection == "rock") {
-            return "Player wins. You WIN this round";
-        }
-        else if (playerSelection == "paper" && computerSelection == "paper") {
-            return "It's a DRAW this round";
-        }
-        else if (playerSelection == "paper" && computerSelection == "scissors") {
-            return "Computer wins. You LOSE this round";
-        }
-        else if (playerSelection == "scissors" && computerSelection == "rock") {
-            return "Computer wins. You LOSE this round";
-        }
-        else if (playerSelection == "scissors" && computerSelection == "paper") {
-            return "Player wins. You WIN this round";
-        }
-        else {
-            return "It's a DRAW this round";
-        }
-}
- 
-const playerSelection = "rock"; //TEST
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection)); //TEST
-console.log(typeof playRound); // TEST
-
-
-
-
-
-
-/* 6. Write a NEW function called game(). 
-Call the playRound function inside of this one to play a 5 round game 
-that keeps score and reports a winner or loser at the end. 
-
-- Remember loops? This is a great opportunity to use one to play those five rounds:
-    for (let i = 0; i < 5; i++) {
-      // your code here!
-    } 
-
-- At this point you should be using console.log() to display the results of each round and the winner at the end.
-- Use prompt() to get input from the user. Read the docs here if you need to.
-- Feel free to re-work your previous functions if you need to. 
-  Specifically, you might want to change the return value to something more useful.
-- Feel free to create more “helper” functions if you think it would be useful.*/    
-
-
-    </script> 
+    <script src="script.js" charset="utf-8"></script>
 
   </body>
 

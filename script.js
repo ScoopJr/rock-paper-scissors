@@ -1,165 +1,69 @@
-/*const playerSelectionDisplay = document.getElementById('player-selection')
-const computerSelectionDisplay = document.getElementById('computer-selection')
-const roundResult = document.getElementById('round-result')
-const possibleSelections = document.querySelectorAll('button')
-let playerSelection
 
-possibleSelections.forEach(possibleSelection => possibleSelection.addEventListener('click', (e) => {
-    playerSelection = e.target.id
-    playerSelectionDisplay.innerHTML = playerSelection
-}))*/
+const playerSelectionDisplay = document.getElementById('player-selection');
+const computerSelectionDisplay = document.getElementById('computer-selection');
+const resultDisplay = document.getElementById('round-result');
+const possibleSelections = document.querySelectorAll('button');
+let playerSelection;
+let computerSelection;
+let roundResult;
 
-const computerChoiceDisplay = document.getElementById('computer-choice')
-const userChoiceDisplay = document.getElementById('user-choice')
-const resultDisplay = document.getElementById('result')
-const possibleChoices = document.querySelectorAll('button')
-let userChoice
-let computerChoice
-let result
-
-possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
-  userChoice = e.target.id
-  userChoiceDisplay.innerHTML = userChoice
-  generateComputerChoice()
-  getResult()
+possibleSelections.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+    playerSelection = e.target.id;
+    console.log(playerSelection); // TEST
+    playerSelectionDisplay.innerHTML = playerSelection;
+    getComputerSelection();
+    playRound();
 }))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* BLOCK WAS WORKING ON AT START--------------REMOVE IF NEEDED--------------
 // Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function getComputerChoice() {
-    randomNumber = Math.floor(Math.random() * 3);
+function getComputerSelection() {
+    const randomNumber = Math.floor(Math.random() * 3);
+    //console.log(randomNumber) //TEST
 
-    if (randomNumber == "0") {
-        return "rock";
+    if (randomNumber == 0) {
+        computerSelection = "rock";
+    } else if (randomNumber == 1) {
+        computerSelection =  "paper";
+    } else if (randomNumber == 2) {
+        computerSelection =  "scissors";
+    } else {
+        computerSelection = "Oops. Something went wrong";
     }
-    else if (randomNumber == "1") {
-        return "paper";
-    }
-    else {
-        return "scissors";
-    }
+
+    console.log(computerSelection); // TEST
+    computerSelectionDisplay.innerHTML = computerSelection;
   }
 
-  //console.log(getComputerChoice()); // TEST
-  //console.log(typeof getComputerChoice); // TEST
-BLOCK WAS WORKING ON AT START--------------REMOVE IF NEEDED--------------*/
-
-
-
-/* Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters 
-- the playerSelection and computerSelection 
-- and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-
-Make your function’s playerSelection parameter case-insensitive 
-(so users can input rock, ROCK, RocK or any other variation). */
-
-
-
-
-/* BLOCK WAS WORKING ON AT START--------------REMOVE IF NEEDED--------------
+// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function playRound(playerSelection, computerSelection) {
 
-// playerSelection == "rock" && computerSelection == "rock"        return "It's a DRAW this round";
-// playerSelection == "rock" && computerSelection == "paper"        return "Computer wins. You LOSE this round";
-// playerSelection == "rock" && computerSelection == "scissors"        return "Player wins. You WIN this round";
-
-// playerSelection == "paper" && computerSelection == "rock"        return "Player wins. You WIN this round";
-// playerSelection == "paper" && computerSelection == "paper"        return "It's a DRAW this round";
-// playerSelection == "paper" && computerSelection == "scissors"        return "Computer wins. You LOSE this round";
-
-// playerSelection == "scissors" && computerSelection == "rock"        return string("Computer wins. You LOSE this round";
-// playerSelection == "scissors" && computerSelection == "paper"        return string("Player wins. You WIN this round";
-// playerSelection == "scissors" && computerSelection == "scissors"        return string"It's a DRAW this round";
-
-    if (playerSelection == "rock" && computerSelection == "rock") {
-        return "It's a DRAW this round";
-    }
-    else if (playerSelection == "rock" && computerSelection == "paper") {
-        return "Computer wins. You LOSE this round";
-    }
-    else if (playerSelection == "rock" && computerSelection == "scissors") {
-        return "Player wins. You WIN this round";
-    }
-    else if (playerSelection == "paper" && computerSelection == "rock") {
-        return "Player wins. You WIN this round";
-    }
-    else if (playerSelection == "paper" && computerSelection == "paper") {
-        return "It's a DRAW this round";
-    }
-    else if (playerSelection == "paper" && computerSelection == "scissors") {
-        return "Computer wins. You LOSE this round";
-    }
-    else if (playerSelection == "scissors" && computerSelection == "rock") {
-        return "Computer wins. You LOSE this round";
-    }
-    else if (playerSelection == "scissors" && computerSelection == "paper") {
-        return "Player wins. You WIN this round";
-    }
-    else if (playerSelection == "scissors" && computerSelection == "scissors") {
-        return "It's a DRAW this round";
-    }
-    else {
-        return "Oops. Something went wrong";
+    if (playerSelection == computerSelection) {
+        roundResult = "It's a DRAW this round";
+    } else if (playerSelection == "rock" && computerSelection == "paper") {
+        roundResult =  "Computer wins. You LOSE this round";
+    } else if (playerSelection == "rock" && computerSelection == "scissors") {
+        roundResult = "Player wins. You WIN this round";
+    } else if (playerSelection == "paper" && computerSelection == "rock") {
+        roundResult = "Player wins. You WIN this round";
+    } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        roundResult = "Computer wins. You LOSE this round";
+    } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        roundResult = "Computer wins. You LOSE this round";
+    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        roundResult = "Player wins. You WIN this round";
+    } else {
+        roundResult = "Oops. Something went wrong";
     }
 
-console.log(playRound(playerSelection, computerSelection)); //TEST
+    console.log(roundResult); // TEST
+    resultDisplay.innerHTML = roundResult;
 }
 
-const playerSelection = "rock"; //TEST
-const computerSelection = getComputerChoice();
-
-console.log(playerSelection); //TEST
-//console.log(getComputerChoice()); // TEST -- getComputerChoice and playerSelection seems to be different....
-console.log(computerSelection); // TEST
-console.log(playRound(playerSelection, computerSelection)); //TEST
-//console.log(typeof playRound); // TEST
 
 
 
-
-
-
-// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playGame(rounds) {
-const results = [];
-for (let i = 0; i < rounds; i++) {
-results.push(playRound());
-
-}
-return results;
-}
-
-console.log(playGame(5)); //TEST
-
-//console.game(playRound(playerSelection, computerSelection)); 
-
-BLOCK WAS WORKING ON AT START--------------REMOVE IF NEEDED--------------*/
-
+/*Make your function’s playerSelection parameter case-insensitive 
+(so users can input rock, ROCK, RocK or any other variation). */
 
 
 /* 6. Write a NEW function called game(). 

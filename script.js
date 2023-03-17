@@ -9,7 +9,7 @@ let roundResult;
 
 possibleSelections.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
     playerSelection = e.target.id;
-    console.log(playerSelection); // TEST
+    //console.log(playerSelection); // TEST
     playerSelectionDisplay.innerHTML = playerSelection;
     getComputerSelection();
     playRound();
@@ -35,7 +35,7 @@ function getComputerSelection() {
   }
 
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound(playerSelection, computerSelection) {
+function playRound() {
 
     if (playerSelection == computerSelection) {
         roundResult = "It's a DRAW this round";
@@ -55,7 +55,7 @@ function playRound(playerSelection, computerSelection) {
         roundResult = "Oops. Something went wrong";
     }
 
-    console.log(roundResult); // TEST
+    //console.log(roundResult); // TEST
     resultDisplay.innerHTML = roundResult;
 }
 

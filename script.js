@@ -1,3 +1,13 @@
+/*
+In the playRound function, remove the function parameters playerSelection and computerSelection. 
+Instead, use the global variables playerSelection and computerSelection that are defined outside of the function.
+
+In the game function, remove the for loop that plays five rounds. 
+Instead, call the playRound function inside a while loop that checks the scores of both players. 
+The loop should continue until either the player or the computer reaches a score of 5.
+*/
+
+
 const playerSelectionDisplay = document.getElementById('player-selection');
 const computerSelectionDisplay = document.getElementById('computer-selection');
 const roundResultDisplay = document.getElementById('round-result');
@@ -45,7 +55,7 @@ function getComputerSelection() {
   }
 
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound(playerSelection, computerSelection) {
+function playRound(/*playerSelection, computerSelection*/) {
     //playerSelection = gameResultDisplay();
     computerSelection = getComputerSelection();
 
@@ -72,8 +82,10 @@ function playRound(playerSelection, computerSelection) {
     computerScoreDisplay.innerHTML = computerScore; // Update the computer score display
     roundNumberDisplay.innerHTML = roundNumber; // Update the computer score display
     return roundResult;
+    return roundNumber;
 }
 
+/*
 // TO FIX!-------------------------------------------------------------------------------
 // Function that will play five rounds of ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function game() {
@@ -100,10 +112,30 @@ function game() {
     gameResultDisplay.innerHTML = gameResult;
 
 }
+*/
 
-
-
+function game() {
   
+    while (playerScore < 5 && computerScore < 5) {
+      playRound(playerSelection, computerSelection); 
+        if (roundResult == "Player wins. You WIN this round") {
+        playerScore += 1; 
+        } else if (roundResult == "Computer wins. You LOSE this round") {
+        computerScore += 1; 
+        }
+    }
+  
+    if (playerScore == 5) {
+      gameResult = "PLAYER WINS THE GAME!"; 
+    } else if (computerScore == 5) {
+      gameResult = "COMPUTER WINS THE GAME.... better luck next time."; 
+    } else {
+        gameResult = "Oops. Something went wrong"; 
+    }
+  
+    gameResultDisplay.innerHTML = gameResult;
+  
+  }
 
 
 

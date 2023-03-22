@@ -1,13 +1,92 @@
-/*
-In the playRound function, remove the function parameters playerSelection and computerSelection. 
-Instead, use the global variables playerSelection and computerSelection that are defined outside of the function.
+//This game will be played from the console for now
 
-In the game function, remove the for loop that plays five rounds. 
-Instead, call the playRound function inside a while loop that checks the scores of both players. 
-The loop should continue until either the player or the computer reaches a score of 5.
-*/
+const selections = ["rock", "paper", "scissors"] // possible choices in an array
+
+// Function that will return the users selection of ‘Rock’, ‘Paper’ or ‘Scissors’.
+function getPlayerChoice() { 
+  let playerInput = prompt("Player/'s turn! Make your selection by typing: Rock, Paper, or Scissors"); //prompt player to type
+  while (playerInput == null) { //to execute when user clicks cancel
+    playerInput = prompt("This pop up cannot be cancelled. Please make your selection by typing: Rock, Paper, or Scissors");
+  }
+  playerInput = playerInput.toLowerCase(); //changes users input to lowercase
+  let check = validatePlayerInput(playerInput);
+  while (check == false) {
+    prompt("Please check the spelling of: Rock, Paper, or Scissors");
+  }
+  //console.log(playerInput);
+} 
+
+// Function that will validate that the user typed ‘Rock’, ‘Paper’ or ‘Scissors’. 
+function validatePlayerInput(playerInput) {
+  if (selections.includes(playerInput)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
+function getComputerChoice() {
+  return selections[Math.floor(Math.random()*selections.length)] //rounds number down, returns random number up to 2.99 and picks from array
+
+  /* INITIAL THOUGHT 
+   const randomNumber = Math.floor(Math.random() * 3);
+    if (randomNumber == 0) {
+        return computerSelectiplayRoundon = "rock"; 
+    } else if (randomNumber == 1) {
+        return computerSelection =  "paper";
+    } else {
+        return computerSelection =  "scissors";
+    }*/
+}
+
+// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
+function playRound() {
+  const playerSelection = getPlayerChoice(); //uses return from getPlayerChoice function
+  const computerSelection = getComputerChoice(); //uses return from getComputerChoice function
+
+}
+
+// Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’ where the first to 5 wins. 
+function game() {
+  playRound(); //calls playRound function
+}
+
+game();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TO REWORK
 const playerSelectionDisplay = document.getElementById('player-selection');
 const computerSelectionDisplay = document.getElementById('computer-selection');
 const roundResultDisplay = document.getElementById('round-result');
@@ -55,7 +134,7 @@ function getComputerSelection() {
   }
 
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound(/*playerSelection, computerSelection*/) {
+function playRound() {
     //playerSelection = gameResultDisplay();
     computerSelection = getComputerSelection();
 
@@ -85,11 +164,6 @@ function playRound(/*playerSelection, computerSelection*/) {
     return roundNumber;
 }
 
-/*
-// TO FIX!-------------------------------------------------------------------------------
-// Function that will play five rounds of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function game() {
-  
     for (let i = 0; i < 5; i++) {
       playRound(playerSelection, computerSelection); // Use the global playerSelection and computerSelection variables
         if (roundResult == "Player wins. You WIN this round") {
@@ -101,9 +175,8 @@ function game() {
   
     if (playerScore == 5) {
       gameResult == "PLAYER WINS THE GAME!"; 
-    } else if (computerScore == 5) {
-      gameResult = "COMPUTER WINS THE GAME.... better luck next time."; 
-    } else if (playerScore < 5 && computerScore < 5) {
+    } else if (computerScore == 5) {// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
+function playRound() {
         gameResult = ".... who will win the game?....."
     } else {
         gameResult = "Oops. Something went wrong"; 
@@ -111,8 +184,6 @@ function game() {
 
     gameResultDisplay.innerHTML = gameResult;
 
-}
-*/
 
 function game() {
   
@@ -136,27 +207,4 @@ function game() {
     gameResultDisplay.innerHTML = gameResult;
   
   }
-
-
-
-
-/*Make your function’s playerSelection parameter case-insensitive 
-(so users can input rock, ROCK, RocK or any other variation). */
-
-
-/* 6. Write a NEW function called game(). 
-Call the playRound function inside of this one to play a 5 round game 
-that keeps score and reports a winner or loser at the end. 
-
-- Remember loops? This is a great opportunity to use one to play those five rounds:
-for (let i = 0; i < 5; i++) {
-  // your code here!
-} 
-
-- At this point you should be using console.log() to display the results of each round and the winner at the end.
-- Use prompt() to get input from the user. Read the docs here if you need to.
-- Feel free to re-work your previous functions if you need to. 
-Specifically, you might want to change the return value to something more useful.
-- Feel free to create more “helper” functions if you think it would be useful.*/  
-
-
+*/

@@ -51,14 +51,15 @@ function getComputerChoice() {
 
 
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound() {
+function playRound(roundNumber) {
   const playerSelection = getPlayerChoice(); //uses return from getPlayerChoice function
-  console.log(playerSelection); //TEST
+  //console.log(playerSelection); //TEST
   const computerSelection = getComputerChoice(); //uses return from getComputerChoice function
-  console.log(computerSelection); //TEST
+  //console.log(computerSelection); //TESTPlay Again
   const roundWinner = getRoundWinner(playerSelection, computerSelection); //uses return from getRoundWinner function
-  console.log(roundWinner); //TEST
+  //console.log(roundWinner); //TEST
   roundWinnerList.push(roundWinner); //add roundWinner to the roundWinnerList array
+  countRound(playerSelection, computerSelection, roundWinner, roundNumber)
 }
 
 
@@ -71,28 +72,45 @@ function getRoundWinner(playerChoice, computerChoice) {
     (playerChoice == "paper" && computerChoice == "rock") ||
     (playerChoice == "scissors" && computerChoice == "rock")
     ) {
-      return "Computer wins. You LOSE this round."; 
+      return "Computer wins. You LOSE this rPlay Againound."; 
     } else {
       return "Player wins. You WIN this round.";
     }
   }
 
+// Function that will keep a log of the round number
+function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
+  console.log("Round:", roundNumber);
+  console.log("Player chose:", playerChoice);
+  console.log("Computer chose:", computerChoice);
+  console.log("Round result:", roundWinner);
+  console.log("----------------------------------------");
+}
+
 
 // Function that will keep a log of the winners of each round
 function countWins() {
-  console.log(roundWinnerList); //OPTIMISE WITH A FILTER
+  //console.log(roundWinnerList); //Optimise with filter below
+  let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
+  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length;
+  let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW!!! Play this round again.").length; 
+  console.log("Game result:");
+  console.log("PLayers Wins:", playerWinsRound);
+  console.log("Computer Wins:", computerWinsRound);
+  console.log("Draws:", drawRound);
+  console.log("========================================");
 }
 
 
-// Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’ where the first to 5 wins 
+// Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’. A game is best of 5.
 function game() {
   for (let i = 1; i < 6; i++) { // start at round 1, plays 5 rounds, add one round each loop
-    playRound(); //uses playRound function return
+    playRound(i); //uses playRound function return. Pass (i) to log round.
   }
+  document.querySelector("button").textContent = "Play Again"; // After the first game, update the button text
   countWins(); //uses countWins function return
 }
 
-game();
 
 
 
@@ -126,125 +144,3 @@ game();
 
 
 
-/* TO REWORK
-const playerSelectionDisplay = document.getElementById('player-selection');
-const computerSelectionDisplay = document.getElementById('computer-selection');
-const roundResultDisplay = document.getElementById('round-result');
-const possibleSelections = document.querySelectorAll('button');
-const playerScoreDisplay = document.getElementById('player-score'); 
-const computerScoreDisplay = document.getElementById('computer-score'); 
-const gameResultDisplay = document.getElementById('game-result'); 
-const roundNumberDisplay = document.getElementById('round-number'); 
-let playerSelection;
-let computerSelection;
-let roundResult;
-let playerScore = 0; // ADDED
-let computerScore = 0; // ADDED
-let roundNumber = 1; // ADDED
-let gameResult; // ADDED
-
-possibleSelections.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
-    playerSelection = e.target.id;
-    //console.log(playerSelection); // TEST
-    //return playerSelection; //ADDED
-    playerSelectionDisplay.innerHTML = playerSelection;
-    getComputerSelection();
-    playRound();
-    game();
-}))
-
-// Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function getComputerSelection() {
-    const randomNumber = Math.floor(Math.random() * 3);
-    //console.log(randomNumber) //TEST
-
-    if (randomNumber == 0) {
-        computerSelection = "rock"; 
-    } else if (randomNumber == 1) {
-        computerSelection =  "paper";
-    } else if (randomNumber == 2) {
-        computerSelection =  "scissors";
-    } else {
-        computerSelection = "Oops. Something went wrong"; 
-    }
-
-    //console.log(computerSelection); // TEST
-    computerSelectionDisplay.innerHTML = computerSelection;
-    return computerSelection;
-  }
-
-// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound() {
-    //playerSelection = gameResultDisplay();
-    computerSelection = getComputerSelection();
-
-    if (playerSelection == computerSelection) {
-        roundResult = "It's a DRAW!!! Play this round again."; 
-    } else if 
-        ((playerSelection == "rock" && computerSelection == "paper") || 
-        (playerSelection == "paper" && computerSelection == "rock") ||
-        (playerSelection == "scissors" && computerSelection == "rock")) {
-        roundResult =  "Computer wins. You LOSE this round."; 
-        computerScore += 1; 
-        roundNumber += 1;
-    } else if 
-        ((playerSelection == "rock" && computerSelection == "scissors") ||
-        (playerSelection == "paper" && computerSelection == "scissors") ||
-        (playerSelection == "scissors" && computerSelection == "paper")) {
-        roundResult = "Player wins. You WIN this round.";
-        playerScore += 1; 
-        roundNumber += 1;
-        }
-    //console.log(roundResult); // TEST
-    roundResultDisplay.innerHTML = roundResult;
-    playerScoreDisplay.innerHTML = playerScore; // Update the player score display
-    computerScoreDisplay.innerHTML = computerScore; // Update the computer score display
-    roundNumberDisplay.innerHTML = roundNumber; // Update the computer score display
-    return roundResult;
-    return roundNumber;
-}
-
-    for (let i = 0; i < 5; i++) {
-      playRound(playerSelection, computerSelection); // Use the global playerSelection and computerSelection variables
-        if (roundResult == "Player wins. You WIN this round") {
-        playerScore += 1; 
-        } else if (roundResult == "Computer wins. You LOSE this round") {
-        computerScore += 1; 
-        }
-    }
-  
-    if (playerScore == 5) {
-      gameResult == "PLAYER WINS THE GAME!"; 
-    } else if (computerScore == 5) {// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound() {
-        gameResult = ".... who will win the game?....."
-    } else {
-        gameResult = "Oops. Something went wrong"; 
-    }
-
-    gameResultDisplay.innerHTML = gameResult;
-
-
-function game() {
-  
-    while (playerScore < 5 && computerScore < 5) {
-      playRound(playerSelection, computerSelection); 
-        if (roundResult == "Player wins. You WIN this round") {
-        playerScore += 1; 
-        } else if (roundResult == "Computer wins. You LOSE this round") {
-        computerScore += 1; 
-        }
-    }
-  
-    if (playerScore == 5) {
-      gameResult = "PLAYER WINS THE GAME!"; 
-    } else if (computerScore == 5) {
-      gameResult = "COMPUTER WINS THE GAME.... better luck next time."; 
-    } else {
-        gameResult = "Oops. Something went wrong"; 
-    }
-  
-    gameResultDisplay.innerHTML = gameResult;
-  
-  }
-*/

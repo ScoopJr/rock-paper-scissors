@@ -92,7 +92,7 @@ function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
 function countWins() {
   //console.log(roundWinnerList); //Optimise with filter below
   let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
-  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round."; 
+  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round."); 
   let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW this round!").length; 
   console.log("Game result:");
   console.log("PLayers Wins:", playerWinsRound);

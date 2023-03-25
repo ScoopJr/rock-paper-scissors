@@ -66,13 +66,13 @@ function playRound(roundNumber) {
 // Function that will decide the winner of a round
 function getRoundWinner(playerChoice, computerChoice) {
   if (playerChoice == computerChoice) {
-    return "It's a DRAW!!! Play this round again."; 
+    return "It's a DRAW this round!"; 
   } else if (
     (playerChoice == "rock" && computerChoice == "paper") || 
     (playerChoice == "paper" && computerChoice == "rock") ||
     (playerChoice == "scissors" && computerChoice == "rock")
     ) {
-      return "Computer wins. You LOSE this rPlay Againound."; 
+      return "Computer wins. You LOSE this round."; 
     } else {
       return "Player wins. You WIN this round.";
     }
@@ -92,8 +92,8 @@ function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
 function countWins() {
   //console.log(roundWinnerList); //Optimise with filter below
   let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
-  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length;
-  let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW!!! Play this round again.").length; 
+  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round."; 
+  let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW this round!").length; 
   console.log("Game result:");
   console.log("PLayers Wins:", playerWinsRound);
   console.log("Computer Wins:", computerWinsRound);
@@ -110,18 +110,6 @@ function game() {
   document.querySelector("button").textContent = "Play Again"; // After the first game, update the button text
   countWins(); //uses countWins function return
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

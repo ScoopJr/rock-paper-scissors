@@ -13,8 +13,11 @@ function getPlayerChoice() {
   let check = validatePlayerInput(playerInput); // calls function to validate user's input
   while (check == false) { //to execute when user leaves blank or misspells
     playerInput = prompt("Please check the spelling of: Rock, Paper, or Scissors");
-    while (playerInput == null) { //to exit the above loop ------ TO FIX
-      playerInput = prompt("Please make your selection by typing: Rock, Paper, or Scissors"); 
+    //while (playerInput == null) { //to exit the above loop ------ TO FIX
+    //  playerInput = prompt("Please make your selection by typing: Rock, Paper, or Scissors"); 
+    //}
+    while (playerInput == null) { //to execute when user clicks cancel
+      playerInput = prompt("This pop up cannot be cancelled. Please make your selection by typing: Rock, Paper, or Scissors");
     }
     playerInput = playerInput.toLowerCase;
     check = validatePlayerInput(playerInput);

@@ -1,3 +1,5 @@
+
+/* CONSOLE-------------------------
 //This game will be played from the console for now
 
 const selections = ["rock", "paper", "scissors"] // possible choices in an array
@@ -13,11 +15,8 @@ function getPlayerChoice() {
   let check = validatePlayerInput(playerInput); // calls function to validate user's input
   while (check == false) { //to execute when user leaves blank or misspells
     playerInput = prompt("Please check the spelling of: Rock, Paper, or Scissors");
-    //while (playerInput == null) { //to exit the above loop ------ TO FIX
-    //  playerInput = prompt("Please make your selection by typing: Rock, Paper, or Scissors"); 
-    //}
-    while (playerInput == null) { //to execute when user clicks cancel
-      playerInput = prompt("This pop up cannot be cancelled. Please make your selection by typing: Rock, Paper, or Scissors");
+    while (playerInput == null) { //to exit the above loop ------ TO FIX
+      playerInput = prompt("Please make your selection by typing: Rock, Paper, or Scissors"); 
     }
     playerInput = playerInput.toLowerCase;
     check = validatePlayerInput(playerInput);
@@ -50,9 +49,9 @@ function getComputerChoice() {
     } else {
         return computerSelection =  "scissors";
     }*/
-}
+//}-------------------------------
 
-
+/* CONSOLE-------------------------
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function playRound(roundNumber) {
   const playerSelection = getPlayerChoice(); //uses return from getPlayerChoice function
@@ -113,7 +112,7 @@ function game() {
   document.querySelector("button").textContent = "Play Again"; // After the first game, update the button text
   countWins(); //uses countWins function return
 }
-
+------------------*/
 
 
 

@@ -3,11 +3,44 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial scale=1.0">
-    <title>Console Rock Paper Scissors</title>
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css">
   </head>
+  
   <script src="script.js" defer></script>
+  
   <body>
+    
+    <div class="score">
+      <h1 class="draws">Draws: 0</h1>
+    </div>
+    
+    <div class="winnerDiv">
+      <h1 class="winner"></h1>
+      <button class="restart" onclick="restartGame()">Play Again</button>
+    </div>
+
+    <div class="playerSection">
+      <h3 class="playerSelection"></h3>
+      <h3 class="playerScore"></h3>
+      <div class="playerImages">
+        <img src="./images/rock.png" alt="Rock" class="playerImg" id="rock">
+        <img src="./images/paper.png" alt="Paper" class="playerImg" id="paper">
+        <img src="./images/scissors.png" alt="Scissors" class="playerImg" id="scissors">
+      </div>
+    </div>
+
+    <div class="computerSection">
+      <h3 class="computerSelection"></h3>
+      <h3 class="computerScore"></h3>
+      <div class="computerImages">
+        <img src="./images/rock.png" alt="Rock" class="rock">
+        <img src="./images/paper.png" alt="Paper" class="paper">
+        <img src="./images/scissors.png" alt="Scissors" class="scissors">
+      </div>
+    </div>
+
+    <!-- CONSOLE
     <div class="container">
       <h1>Console Rock Paper Scissor</h1>
       <p>A simple implementation of the classic game <strong>Rock, Paper, Scissors</strong>. Follow the instructions below to play the game.</p> 
@@ -18,7 +51,7 @@
         <li>If you want to play again, click <strong>Play Again</strong>.</li>
         <li>A running total will be kept of all rounds played.</li>
       </ol>
-      <button onclick="game()"><strong>Start</strong></button> <!--calls game function. game starts on click-->
+      <button onclick="game()"><strong>Start</strong></button> //calls game function. game starts on click-->
     </div>
 
 

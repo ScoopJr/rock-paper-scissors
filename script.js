@@ -1,118 +1,132 @@
+// top of the page   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+const selections = ["rock", "paper", "scissors"] 
+let roundWinnerList = []; // array to keep a list of round winners
 
-/* CONSOLE-------------------------
-//This game will be played from the console for now
-
-const selections = ["rock", "paper", "scissors"] // possible choices in an array
-const roundWinnerList = []; // array to keep a list of round winners
-
-// Function that will return the users selection of ‘Rock’, ‘Paper’ or ‘Scissors’.
-function getPlayerChoice() { 
-  let playerInput = prompt("Player's turn! Make your selection by typing: Rock, Paper, or Scissors"); //prompt player to type
-  while (playerInput == null) { //to execute when user clicks cancel
-    playerInput = prompt("This pop up cannot be cancelled. Please make your selection by typing: Rock, Paper, or Scissors");
-  }
-  playerInput = playerInput.toLowerCase(); //changes users input to lowercase
-  let check = validatePlayerInput(playerInput); // calls function to validate user's input
-  while (check == false) { //to execute when user leaves blank or misspells
-    playerInput = prompt("Please check the spelling of: Rock, Paper, or Scissors");
-    while (playerInput == null) { //to exit the above loop ------ TO FIX
-      playerInput = prompt("Please make your selection by typing: Rock, Paper, or Scissors"); 
+//  startGame()   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+// Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’. A game is best of 5.
+function game() {
+  let images = document.querySelectorAll('img') // grab all images
+  images.forEach((image) =>
+  image.addEventListener(('click'), () => { // if image is clicked, calls function
+    if(image.id) { // check if the image has an id
+      playRound(image.id); // plays round if image id is found as computer image does not have an id
     }
-    playerInput = playerInput.toLowerCase;
-    check = validatePlayerInput(playerInput);
-  }
-  return playerInput;
-  //console.log(playerInput); //TEST
-} 
-
-
-// Function that will validate that the user typed ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function validatePlayerInput(playerInput) {
-  if (selections.includes(playerInput)) { // matching selections variable and playerInput
-    return true;
-  } else {
-    return false;
-  }
+  }))
 }
 
-
+// computerSelect()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function getComputerChoice() {
+  // update DOM with computer selection
   return selections[Math.floor(Math.random()*selections.length)] //rounds number down, returns random number up to 2.99 and picks from array
-
-  /* INITIAL THOUGHT 
-   const randomNumber = Math.floor(Math.random() * 3);
-    if (randomNumber == 0) {
-        return computerSelection = "rock"; 
-    } else if (randomNumber == 1) {
-        return computerSelection =  "paper";
-    } else {
-        return computerSelection =  "scissors";
-    }*/
-//}-------------------------------
-
-/* CONSOLE-------------------------
-// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
-function playRound(roundNumber) {
-  const playerSelection = getPlayerChoice(); //uses return from getPlayerChoice function
-  //console.log(playerSelection); //TEST
-  const computerSelection = getComputerChoice(); //uses return from getComputerChoice function
-  //console.log(computerSelection); //TESTPlay Again
-  const roundWinner = getRoundWinner(playerSelection, computerSelection); //uses return from getRoundWinner function
-  //console.log(roundWinner); //TEST
-  roundWinnerList.push(roundWinner); //add roundWinner to the roundWinnerList array
-  countRound(playerSelection, computerSelection, roundWinner, roundNumber)
 }
 
+//  playRound()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+// Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
+function playRound(playerSelection) {
+  let wins = countWins();
+  if(wins >= 5) {
+    return
+  }
+  const computerSelection = getComputerChoice(); //uses return from getComputerChoice function
+  const roundWinner = getRoundWinner(playerSelection, computerSelection); //uses return from getRoundWinner function
+  roundWinnerList.push(roundWinner); //add roundWinner to the roundWinnerList array
+  //countRound(playerSelection, computerSelection, roundWinner, roundNumber)
+  totalWins();
+  displayRoundResult(playerSelection, computerSelection, roundWinner);
+  wins = countWins() 
+  if(wins == 5) {
+    // display game result
+    // update button to visible
+    // update text to display game winner
+    displayGameWinner();
+  }
+}
 
+//  displayRound()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+function displayRoundResult(playerSelection, computerSelection, roundWinner) {
+  document.querySelector('.playerSelection').textContent = `You selected: ${playerSelection.charAt(0).toUpperCase() 
+    + playerSelection.slice(1)}`;
+  document.querySelector('.computerSelection').textContent = `Computer selected: ${computerSelection.charAt(0).toUpperCase() 
+    + computerSelection.slice(1)}`;
+  //document.querySelector('.draws').textContent = `Draws: ${drawRound}`
+  document.querySelector('.winner').textContent = `Round winner is: ${roundWinner}`;
+}
+
+// checkWinner()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will decide the winner of a round
 function getRoundWinner(playerChoice, computerChoice) {
   if (playerChoice == computerChoice) {
     return "It's a DRAW this round!"; 
   } else if (
-    (playerChoice == "rock" && computerChoice == "paper") || 
+    (playerChoice == "rock" && computerChoice == "scissors") || 
     (playerChoice == "paper" && computerChoice == "rock") ||
-    (playerChoice == "scissors" && computerChoice == "rock")
+    (playerChoice == "scissors" && computerChoice == "paper")
     ) {
-      return "Computer wins. You LOSE this round."; 
+      return "Player wins. You WIN this round."; 
     } else {
-      return "Player wins. You WIN this round.";
+      return"Computer wins. You LOSE this round."; 
     }
   }
 
+
 // Function that will keep a log of the round number
-function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
-  console.log("Round:", roundNumber);
-  console.log("Player chose:", playerChoice);
-  console.log("Computer chose:", computerChoice);
-  console.log("Round result:", roundWinner);
-  console.log("----------------------------------------");
-}
+//function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
+//}
 
 
-// Function that will keep a log of the winners of each round
-function countWins() {
-  //console.log(roundWinnerList); //Optimise with filter below
+// tallyWins()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+// Function to keep a running total of the number of wins
+function totalWins() {
   let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
   let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length; 
   let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW this round!").length; 
-  console.log("Game result:");
-  console.log("PLayers Wins:", playerWinsRound);
-  console.log("Computer Wins:", computerWinsRound);
-  console.log("Draws:", drawRound);
-  console.log("========================================");
+  document.querySelector(".playerScore").textContent = `Score: ${playerWinsRound}`;
+  document.querySelector(".computerScore").textContent = `Score: ${computerWinsRound}`;
+  document.querySelector(".draws").textContent = `Draws: ${drawRound}`;
+}
+
+// checkWins()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+// Function that will keep a log of the winners of each round
+function countWins() {
+  let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
+  let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length; 
+  return Math.max(playerWinsRound, computerWinsRound)
 }
 
 
-// Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’. A game is best of 5.
-function game() {
-  for (let i = 1; i < 6; i++) { // start at round 1, plays 5 rounds, add one round each loop
-    playRound(i); //uses playRound function return. Pass (i) to log round.
+// Function to check the number of wins
+//function checkWins() {
+  //let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
+  //let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length; 
+  //let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW this round!").length; 
+//}
+
+// displayEnd()  DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+// Function that will display the result of the game
+function displayGameWinner() {
+  let playerWins = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
+  if(playerWins == 5) {
+    document.querySelector('.winner').textContent = 'You won the game! You beat the Computer 5 times.'
+  } else {
+    document.querySelector('.winner').textContent = 'Unlucky... the Computer beat you 5 times and won the game.'
   }
-  document.querySelector("button").textContent = "Play Again"; // After the first game, update the button text
-  countWins(); //uses countWins function return
+  document.querySelector('.restart').style.display = 'flex';
 }
-------------------*/
+
+// resetGame()   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+function restartGame() {
+  roundWinnerList = [];
+  document.querySelector(".playerScore").textContent = "Score: 0";
+  document.querySelector(".computerScore").textContent = "Score: 0";
+  document.querySelector(".draws").textContent = "Draws: 0";
+  document.querySelector(".winner").textContent = "";
+  document.querySelector(".playerSelection").textContent = "";
+  document.querySelector(".computerSelection").textContent = "";
+  document.querySelector(".restart").style.display = "none";
+}
+
+game();
 
 
 

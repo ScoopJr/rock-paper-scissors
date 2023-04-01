@@ -1,3 +1,5 @@
+/////////FIX COMPUTER NEEDS TO ENLARGE TOO/////////////
+
 // top of the page   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 const selections = ["rock", "paper", "scissors"] 
 let roundWinnerList = []; // array to keep a list of round winners
@@ -19,6 +21,10 @@ function game() {
 function getComputerChoice() {
   // update DOM with computer selection
   return selections[Math.floor(Math.random()*selections.length)] //rounds number down, returns random number up to 2.99 and picks from array
+  document.querySelector(`.${selections}`).classList.add("active");
+  setTimeout(() => {
+    document.querySelector(`.${selections}`).classList.remove("active");
+  }, 900);
 }
 
 //  playRound()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD

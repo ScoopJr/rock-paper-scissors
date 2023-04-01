@@ -1,10 +1,8 @@
 /////////FIX COMPUTER NEEDS TO ENLARGE TOO/////////////
 
-// top of the page   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 const selections = ["rock", "paper", "scissors"] 
 let roundWinnerList = []; // array to keep a list of round winners
 
-//  startGame()   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will play a game of ‘Rock’, ‘Paper’ or ‘Scissors’. A game is best of 5.
 function game() {
   let images = document.querySelectorAll('img') // grab all images
@@ -16,7 +14,6 @@ function game() {
   }))
 }
 
-// computerSelect()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function getComputerChoice() {
   // update DOM with computer selection
@@ -27,7 +24,6 @@ function getComputerChoice() {
   }, 900);
 }
 
-//  playRound()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will play a single round of ‘Rock’, ‘Paper’ or ‘Scissors’. 
 function playRound(playerSelection) {
   let wins = countWins();
@@ -42,14 +38,10 @@ function playRound(playerSelection) {
   displayRoundResult(playerSelection, computerSelection, roundWinner);
   wins = countWins() 
   if(wins == 5) {
-    // display game result
-    // update button to visible
-    // update text to display game winner
     displayGameWinner();
   }
 }
 
-//  displayRound()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 function displayRoundResult(playerSelection, computerSelection, roundWinner) {
   document.querySelector('.playerSelection').textContent = `You selected: ${playerSelection.charAt(0).toUpperCase() 
     + playerSelection.slice(1)}`;
@@ -59,7 +51,6 @@ function displayRoundResult(playerSelection, computerSelection, roundWinner) {
   document.querySelector('.winner').textContent = `Round winner is: ${roundWinner}`;
 }
 
-// checkWinner()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will decide the winner of a round
 function getRoundWinner(playerChoice, computerChoice) {
   if (playerChoice == computerChoice) {
@@ -75,13 +66,6 @@ function getRoundWinner(playerChoice, computerChoice) {
     }
   }
 
-
-// Function that will keep a log of the round number
-//function countRound(playerChoice, computerChoice, roundWinner, roundNumber) {
-//}
-
-
-// tallyWins()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function to keep a running total of the number of wins
 function totalWins() {
   let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
@@ -91,8 +75,6 @@ function totalWins() {
   document.querySelector(".computerScore").textContent = `Score: ${computerWinsRound}`;
   document.querySelector(".draws").textContent = `Draws: ${drawRound}`;
 }
-
-// checkWins()    DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will keep a log of the winners of each round
 function countWins() {
   let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
@@ -100,15 +82,6 @@ function countWins() {
   return Math.max(playerWinsRound, computerWinsRound)
 }
 
-
-// Function to check the number of wins
-//function checkWins() {
-  //let playerWinsRound = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
-  //let computerWinsRound = roundWinnerList.filter((winner) => winner == "Computer wins. You LOSE this round.").length; 
-  //let drawRound = roundWinnerList.filter((winner) => winner == "It's a DRAW this round!").length; 
-//}
-
-// displayEnd()  DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 // Function that will display the result of the game
 function displayGameWinner() {
   let playerWins = roundWinnerList.filter((winner) => winner == "Player wins. You WIN this round.").length;
@@ -120,7 +93,6 @@ function displayGameWinner() {
   document.querySelector('.restart').style.display = 'flex';
 }
 
-// resetGame()   DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 function restartGame() {
   roundWinnerList = [];
   document.querySelector(".playerScore").textContent = "Score: 0";
